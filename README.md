@@ -5,5 +5,5 @@ Aplikacja pisana jest w języku Java, z użyciem biblioteki JavaFX.
 **Autorzy**:
 >Michał Balas,
 >Jan Dobrowolski
-*Wydział Elektryczny, Informatyka, Politechnika Warszawska.*
+>*Wydział Elektryczny, Informatyka, Politechnika Warszawska.*
 
