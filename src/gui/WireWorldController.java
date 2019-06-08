@@ -99,32 +99,32 @@ public class WireWorldController implements Initializable {
 
     private void initializeSpinner(Spinner spinner){
 
-        SpinnerValueFactory<Integer> factory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 200, 10);
 
-        spinner.setValueFactory(factory);
-        spinner.setEditable(true);
+            SpinnerValueFactory<Integer> factory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 200, 10);
 
-        factory.setConverter(new toIntConverter());
-        spinner.getEditor().setOnAction(new EventHandler<ActionEvent>() {
+            spinner.setValueFactory(factory);
+            spinner.setEditable(true);
 
-            @Override
-            public void handle(ActionEvent event) {
+            factory.setConverter(new toIntConverter());
+            spinner.getEditor().setOnAction(new EventHandler<ActionEvent>() {
 
-                String text = spinner.getEditor().getText();
-                if (isInteger(text)) {
+                @Override
+                public void handle(ActionEvent event) {
 
-                    StringConverter<Integer> converter = spinner.getValueFactory().getConverter();
-                    Integer value = converter.fromString(text);
+                    String text = spinner.getEditor().getText();
+                    if (isInteger(text)) {
 
-                    spinner.getValueFactory().setValue(value);
-                } else {
-                    spinner.getValueFactory().setValue(1);
-                    spinner.getValueFactory().setValue(10);
+                        StringConverter<Integer> converter = spinner.getValueFactory().getConverter();
+                        Integer value = converter.fromString(text);
+
+                        spinner.getValueFactory().setValue(value);
+                    } else {
+                        spinner.getValueFactory().setValue(1);
+                        spinner.getValueFactory().setValue(10);
+                    }
+
                 }
-
-            }
-        });
-
+            });
     }
 
 
