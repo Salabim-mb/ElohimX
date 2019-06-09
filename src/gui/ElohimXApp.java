@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MainMenu extends Application {
+public class ElohimXApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -16,6 +16,8 @@ public class MainMenu extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
+
+        ViewCommunicator communicator = new ViewCommunicator();
 
         Parent root = FXMLLoader.load(getClass().getResource("resources/MainMenu.fxml"));
         primaryStage.setTitle("ElohimX");
@@ -26,8 +28,5 @@ public class MainMenu extends Application {
 
 
     }
-
-
-
 
 }

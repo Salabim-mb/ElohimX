@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.Rectangle?>
+
+<fx:root type="javafx.scene.layout.StackPane" prefHeight="600" prefWidth="300" visible="true" opacity="0.95" style="-fx-background-color: cyan;"   xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" >
+
+        <Button fx:id="hideButton" mnemonicParsing="false" onAction="#hideToolbar" prefHeight="25.0" prefWidth="45.0" text="Hide" StackPane.alignment="TOP_LEFT">
+            <StackPane.margin>
+                <Insets left="20.0" top="20.0" />
+            </StackPane.margin>
+        </Button>
+        <Spinner fx:id="genNumSpinner" prefHeight="20.0" prefWidth="80.0" StackPane.alignment="TOP_RIGHT">
+            <StackPane.margin>
+                <Insets right="10.0" top="80.0" />
+            </StackPane.margin>
+        </Spinner>
+        <Label prefHeight="25.0" prefWidth="180.0" text="Number of generations" StackPane.alignment="TOP_LEFT">
+            <font>
+                <Font size="15.0" />
+            </font>
+            <StackPane.margin>
+                <Insets left="10.0" top="80.0" />
+            </StackPane.margin>
+        </Label>
+        <Label prefHeight="25.0" prefWidth="180.0" text="Endless Mode" StackPane.alignment="TOP_LEFT">
+            <font>
+                <Font size="15.0" />
+            </font>
+            <StackPane.margin>
+                <Insets left="10.0" top="130.0" />
+            </StackPane.margin>
+        </Label>
+        <ToggleButton fx:id="endlessModeSwitch" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Toggle" StackPane.alignment="TOP_RIGHT">
+            <StackPane.margin>
+                <Insets right="10.0" top="130.0" />
+            </StackPane.margin>
+        </ToggleButton>
+        <Label prefHeight="25.0" prefWidth="180.0" text="Board dimensions:" StackPane.alignment="TOP_LEFT">
+            <font>
+                <Font size="15.0" />
+            </font>
+            <StackPane.margin>
+                <Insets left="10.0" top="180.0" />
+            </StackPane.margin>
+        </Label>
+        <Label prefHeight="25.0" prefWidth="150.0" text="Height" StackPane.alignment="TOP_LEFT">
+            <StackPane.margin>
+                <Insets left="40.0" top="230.0" />
+            </StackPane.margin>
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Label>
+        <Label prefHeight="25.0" prefWidth="150.0" text="Width" StackPane.alignment="TOP_LEFT">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+            <StackPane.margin>
+                <Insets left="40.0" top="270.0" />
+            </StackPane.margin>
+        </Label>
+        <Spinner fx:id="heightSpinner" prefHeight="20.0" prefWidth="80.0" StackPane.alignment="TOP_RIGHT">
+            <StackPane.margin>
+                <Insets right="40.0" top="230.0" />
+            </StackPane.margin>
+        </Spinner>
+        <Spinner fx:id="widthSpinner" prefHeight="20.0" prefWidth="80.0" StackPane.alignment="TOP_RIGHT">
+            <StackPane.margin>
+                <Insets right="40.0" top="270.0" />
+            </StackPane.margin>
+        </Spinner>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" StackPane.alignment="TOP_LEFT">
+            <StackPane.margin>
+                <Insets left="30.0" top="320.0" />
+            </StackPane.margin>
+        </Rectangle>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0047ff" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" StackPane.alignment="TOP_LEFT">
+            <StackPane.margin>
+                <Insets left="170.0" top="320.0" />
+            </StackPane.margin>
+        </Rectangle>
+        <Label alignment="CENTER" prefHeight="25.0" prefWidth="50.0" text="tail" StackPane.alignment="TOP_LEFT">
+            <StackPane.margin>
+                <Insets left="160.0" right="70.0" top="350.0" />
+            </StackPane.margin>
+        </Label>
+        <Button fx:id="helpButton" mnemonicParsing="false" text="Help..." StackPane.alignment="BOTTOM_RIGHT">
+            <StackPane.margin>
+                <Insets bottom="20.0" right="20.0" />
+            </StackPane.margin>
+        </Button>
+        <Button fx:id="patternsButton" mnemonicParsing="false" prefWidth="120.0" text="Patterns..." StackPane.alignment="TOP_CENTER">
+            <StackPane.margin>
+                <Insets top="400.0" />
+            </StackPane.margin>
+        </Button>
+        <Button fx:id="saveButton" mnemonicParsing="false" prefWidth="120.0" text="Save to file..." StackPane.alignment="TOP_CENTER">
+            <StackPane.margin>
+                <Insets top="450.0" />
+            </StackPane.margin>
+        </Button>
+        <Button fx:id="loadButton" mnemonicParsing="false" prefWidth="120.0" text="Load from file..." StackPane.alignment="TOP_CENTER">
+            <StackPane.margin>
+                <Insets top="500.0" />
+            </StackPane.margin>
+        </Button>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" StackPane.alignment="TOP_LEFT">
+            <StackPane.margin>
+                <Insets left="100.0" top="320.0" />
+            </StackPane.margin>
+        </Rectangle>
+        <Label alignment="CENTER" prefHeight="25.0" prefWidth="50.0" text="empty" StackPane.alignment="TOP_LEFT">
+            <StackPane.margin>
+                <Insets left="20.0" top="350.0" />
+            </StackPane.margin>
+        </Label>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" StackPane.alignment="TOP_LEFT">
+            <StackPane.margin>
+                <Insets left="240.0" top="320.0" />
+            </StackPane.margin>
+        </Rectangle>
+        <Label alignment="CENTER" prefHeight="25.0" prefWidth="50.0" text="head" StackPane.alignment="TOP_LEFT">
+            <StackPane.margin>
+                <Insets left="90.0" top="350.0" />
+            </StackPane.margin>
+        </Label>
+        <Label alignment="CENTER" prefHeight="25.0" prefWidth="80.0" text="conductor" StackPane.alignment="TOP_LEFT">
+            <StackPane.margin>
+                <Insets left="215.0" top="350.0" />
+            </StackPane.margin>
+        </Label>
+        <Button fx:id="backButton" mnemonicParsing="false" onAction="#goBack" text="Back..." StackPane.alignment="BOTTOM_LEFT">
+            <StackPane.margin>
+                <Insets bottom="20.0" left="20.0" />
+            </StackPane.margin>
+        </Button>
+</fx:root>

@@ -49,12 +49,10 @@ public class MainMenuController implements Initializable {
 
     public void openWireWorld(ActionEvent e) throws IOException {
 
-        Parent newParent = FXMLLoader.load(getClass().getResource("resources/WireWorldWindow.fxml"));
-
-        Scene newScene = new Scene(newParent);
+        WWCellViewController root = new WWCellViewController();
 
         Stage window = (Stage)((Node) e.getSource()).getScene().getWindow();
-        window.setScene(newScene);
+        window.setScene(new Scene(root));
         window.setResizable(false);
         window.show();
 
@@ -70,7 +68,7 @@ public class MainMenuController implements Initializable {
 
         Stage window = (Stage)((Node) e.getSource()).getScene().getWindow();
         window.setScene(newScene);
-        window.setResizable(false);
+        //window.setResizable(false);
         window.show();
 
     }
