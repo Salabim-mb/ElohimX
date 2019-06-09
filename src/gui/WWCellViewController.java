@@ -3,6 +3,7 @@ package gui;
 import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
@@ -11,11 +12,19 @@ import java.io.IOException;
 
 public class WWCellViewController extends Pane {
 
-    @FXML
-    Button showButton;
+    private int genNumber;
+    private int boardWidth;
+    private int boardHeight;
+    private boolean endlessMode;
 
     @FXML
-    WWToolbar toolbar;
+    Canvas cellCanvas;
+
+    @FXML
+    private Button showButton;
+
+    @FXML
+    private WWToolbar toolbar;
 
     public WWCellViewController(){
 
@@ -30,7 +39,14 @@ public class WWCellViewController extends Pane {
             throw new RuntimeException();
         }
 
+        setGenNumber(10);
+        setBoardHeight(10);
+        setBoardWidth(10);
+        setEndlessMode(false);
+        ViewCommunicator.setWWController(this);
     }
+
+
 
     @FXML
     public void showToolbar() {
@@ -41,12 +57,31 @@ public class WWCellViewController extends Pane {
     }
 
 
+    public void setGenNumber(int genNumber) {
+        this.genNumber = genNumber;
+    }
 
 
 
+    public void setBoardWidth(int boardWidth) {
+        this.boardWidth = boardWidth;
+    }
 
 
+    public void setBoardHeight(int boardHeight) {
+        this.boardHeight = boardHeight;
+    }
 
 
+    public void setEndlessMode(boolean endlessMode) {
+        this.endlessMode = endlessMode;
+    }
+
+
+    public int getGenNumber(){
+
+        return genNumber;
+
+    }
 
 }

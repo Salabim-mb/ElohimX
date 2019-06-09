@@ -17,7 +17,6 @@ import static utils.SpinnerUtilities.initializeSpinner;
 
 public class WWToolbar extends StackPane {
 
-
     @FXML
     private Spinner<Integer> genNumSpinner, widthSpinner, heightSpinner;
 
@@ -41,7 +40,7 @@ public class WWToolbar extends StackPane {
         initializeSpinner(widthSpinner);
         initializeSpinner(genNumSpinner);
 
-
+        ViewCommunicator.setToolbarController(this);
 
     }
 

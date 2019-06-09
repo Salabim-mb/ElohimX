@@ -1,10 +1,13 @@
 package utils;
 
+import gui.ViewCommunicator;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.util.StringConverter;
+
+import javax.swing.text.View;
 
 public class SpinnerUtilities {
 
@@ -42,9 +45,11 @@ public class SpinnerUtilities {
                     Integer value = converter.fromString(text);
 
                     spinner.getValueFactory().setValue(value);
+                    ViewCommunicator.setWWGenNumber(value);
                 } else {
                     spinner.getValueFactory().setValue(1);
                     spinner.getValueFactory().setValue(10);
+                    ViewCommunicator.setWWGenNumber(10);
                 }
 
             }
