@@ -7,11 +7,11 @@ public class WireWorldCell {
     WireWorldCell(Cell posX, Cell posY, WWStates state) {}
 
     public WireWorldCell() {
-        this.state = WWStates.EMPTY;
+        state = WWStates.EMPTY;
     }
 
     public WWStates getWWState() {
-        return this.state;
+        return state;
     }
 
     public static void setWWState(WWStates ww) {

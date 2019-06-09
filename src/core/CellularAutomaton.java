@@ -7,7 +7,7 @@ import core.WireWorld;
 import core.GameOfLife;
 import core.Generation;
 
-public class CellularAutomaton extends Generation{
+public abstract class CellularAutomaton extends Generation{
 
     private static WireWorld instanceWW;
     private static GameOfLife instanceGOL;
@@ -30,7 +30,8 @@ public class CellularAutomaton extends Generation{
         generations.clear();
     }
 
-    public void runAutomaton() {
-        
+    public void runAutomaton(String mode) {
+        if (mode.equals("WireWorld")) WireWorld.runWireWorld();
+        else if (mode.equals("GameOfLife")) GameOfLife.runGameOfLife();
     }
 }

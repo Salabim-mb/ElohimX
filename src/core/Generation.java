@@ -3,10 +3,12 @@ package core;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Observer;
+import core.Cell;
+
 
 public class Generation{
     private int genNumber;
-    private Cell[][] cells;
+    public static Cell[][] cells;
     ArrayList<Observer> observers;
 
 
@@ -19,17 +21,27 @@ public class Generation{
         return cells;
     }
 
-    public int getRows() {
+    public static int getRows() {
         return cells.length;
     }
 
-    public int getColumns() {
+    public static int getColumns() {
         return cells[0].length;
+    }
+
+    public WireWorldCell getWWState() {
+        return WireWorldCell.getWWState();
+    }
+
+    public GameOfLifeCell getGOLState() {
+        return GameOfLifeCell.getGOLState();
     }
 
     public void setGOLState(GOLStates gol) {
         GameOfLifeCell.setGOLState(gol);
     }
+
+    public void setWWState(WWStates ww) { WireWorldCell.setWWState(ww); }
 
    /* public int[][] getNumericGOLCells() {
         int[][] temp = null;
