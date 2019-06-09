@@ -32,7 +32,7 @@ public abstract class CellularAutomaton extends Generation{
 
     public void runAutomaton(String mode) {
 
-        if (mode.equals("WireWorld")) WireWorld.runWireWorld();
-        else if (mode.equals("GameOfLife")) GameOfLife.runGameOfLife();
+        if (mode.equals("WireWorld")) instanceWW.runWireWorld();
+        else if (mode.equals("GameOfLife")) instanceGOL.runGameOfLife();
     }
 }
