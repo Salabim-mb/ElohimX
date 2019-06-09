@@ -3,7 +3,7 @@ package core;
 import core.GameOfLifeCell;
 import core.WireWorldCell;
 
-public class Cell  {
+public class Cell {
     private int posX;
     private int posY;
 
@@ -20,6 +20,7 @@ public class Cell  {
         return posY;
     }
 
+   /*
     public WWStates currWWState() {
         return WireWorldCell.getWWState();
     }
@@ -53,5 +54,5 @@ public class Cell  {
     }
 
 
-
+*/
 }

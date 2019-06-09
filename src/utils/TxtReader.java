@@ -1,18 +1,16 @@
 package utils;
 
 import java.io.*;
-import core.Cell;
-import core.Generation;
-import core.WWStates;
-import core.GOLStates;
+
+import core.*;
 
 public class TxtReader {
 
-    private static TxtReader instance;
+    private TxtReader instance;
 
     private TxtReader() { }
 
-    public static TxtReader getInstance() {
+    public TxtReader getInstance() {
         if (instance == null)
             instance = new TxtReader();
         return instance;
@@ -33,26 +31,42 @@ public class TxtReader {
         return str.length()-1;
     }
 
-    private Cell[][] strToCellArray(String str, String mode, int height, int width) {
-
-        Cell[][] cells = new Cell[height][width];
+    private WireWorldCell[][] strToWWCellArray(String str, int height, int width) {
+        WireWorldCell[][] cells = new WireWorldCell[height][width];
         int i=0, r=0, c=0;
         while (i < str.length()) {
             while (str.charAt(i) != '\n') {
-                if (mode.equals("WireWorld")) {
-                    switch (str.charAt(i)) {
-                        case '0' : cells[r][c].setWWState(WWStates.EMPTY);
-                        case '1' : cells[r][c].setWWState(WWStates.CONDUCTOR);
-                        case '2' : cells[r][c].setWWState(WWStates.ELECTRON_HEAD);
-                        case '3' : cells[r][c].setWWState(WWStates.ELECTRON_TAIL);
-                        default:
-                    }
-                } else if (mode.equals("GameOfLife")) {
-                    switch (str.charAt(i)) {
-                        case '0' : cells[r][c].setGOLState(GOLStates.DEAD);
-                        case '1' : cells[r][c].setGOLState(GOLStates.ALIVE);
-                        default:
-                    }
+                switch (str.charAt(i)) {
+                    case '0':
+                        cells[r][c].setWWState(WWStates.EMPTY);
+                    case '1':
+                        cells[r][c].setWWState(WWStates.CONDUCTOR);
+                    case '2':
+                        cells[r][c].setWWState(WWStates.ELECTRON_HEAD);
+                    case '3':
+                        cells[r][c].setWWState(WWStates.ELECTRON_TAIL);
+                    default:
+                }
+                i++;
+                c++;
+            }
+            c=0;
+            r++;
+        }
+        return cells;
+    }
+
+    private GameOfLifeCell[][] strToGOLCellArray(String str, int height, int width) {
+        GameOfLifeCell[][] cells = new GameOfLifeCell[height][width];
+        int i=0, r=0, c=0;
+        while (i < str.length()) {
+            while (str.charAt(i) != '\n') {
+                switch (str.charAt(i)) {
+                    case '0':
+                        cells[r][c].setGOLState(GOLStates.DEAD);
+                    case '1':
+                        cells[r][c].setGOLState(GOLStates.ALIVE);
+                    default:
                 }
                 i++;
                 c++;
@@ -72,7 +86,7 @@ public class TxtReader {
             readBufferWW = new BufferedReader(new FileReader(srcFile));
             while(readBufferWW.readLine() != null)
                 str += readBufferWW.readLine() + "\n";
-            Cell[][] grid = strToCellArray(str, "WireWorld", height, width);
+            WireWorldCell[][] grid = strToWWCellArray(str, height, width);
             Generation zero = new Generation (0, grid);
         }
         finally {
@@ -92,7 +106,7 @@ public class TxtReader {
             readBufferGOL = new BufferedReader(new FileReader(srcFile));
             while(readBufferGOL.readLine() != null)
                 str += readBufferGOL.readLine() + "\n";
-            Cell[][] grid = strToCellArray(str, "GameOfLife", height, width);
+            GameOfLifeCell[][] grid = strToGOLCellArray(str, height, width);
             Generation zero = new Generation (0, grid);
         }
         finally {

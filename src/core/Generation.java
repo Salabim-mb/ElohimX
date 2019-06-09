@@ -8,7 +8,7 @@ import core.Cell;
 
 public class Generation{
     private int genNumber;
-    public static Cell[][] cells;
+    private Cell[][] cells;
     ArrayList<Observer> observers;
 
 
@@ -17,31 +17,17 @@ public class Generation{
         this.cells = cells;
     }
 
-    public  Cell[][] getCells() {
+    public Cell[][] getCells() {
         return cells;
     }
 
-    public static int getRows() {
+    public int getRows() {
         return cells.length;
     }
 
-    public static int getColumns() {
+    public int getColumns() {
         return cells[0].length;
     }
-
-    public WireWorldCell getWWState() {
-        return WireWorldCell.getWWState();
-    }
-
-    public GameOfLifeCell getGOLState() {
-        return GameOfLifeCell.getGOLState();
-    }
-
-    public void setGOLState(GOLStates gol) {
-        GameOfLifeCell.setGOLState(gol);
-    }
-
-    public void setWWState(WWStates ww) { WireWorldCell.setWWState(ww); }
 
    /* public int[][] getNumericGOLCells() {
         int[][] temp = null;

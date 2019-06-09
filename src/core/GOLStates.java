@@ -1,6 +1,6 @@
 package core;
 
-public enum GOLStates extends GameOfLifeCell {
+public enum GOLStates {
     ALIVE, DEAD;
 
 }

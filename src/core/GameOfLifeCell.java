@@ -1,17 +1,20 @@
 package core;
 
-import static core.WWStates.*;
-import core.Cell;
+import core.GOLStates;
 
-public class GameOfLifeCell {
+public class GameOfLifeCell extends Cell{
 
     private GOLStates state;
 
-    GameOfLifeCell(Cell posX, Cell posY, GOLStates state) {}
+    public GameOfLifeCell(int posX, int posY, GOLStates state) {
+        super(posX, posY);
+    }
 
+    /*
     public GameOfLifeCell() {
         state = GOLStates.DEAD;
     }
+    */
 
     public GOLStates getGOLState() {
         return state;

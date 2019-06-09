@@ -1,6 +1,6 @@
 package core;
 
-public enum WWStates extends WireWorldCell {
+public enum WWStates {
     EMPTY, ELECTRON_HEAD, ELECTRON_TAIL, CONDUCTOR;
 
 }

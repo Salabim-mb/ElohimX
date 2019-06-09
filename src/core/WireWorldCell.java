@@ -1,20 +1,24 @@
 package core;
 
-public class WireWorldCell {
+import core.WWStates;
 
-    private static  WWStates state;
+public class WireWorldCell extends Cell{
 
-    WireWorldCell(Cell posX, Cell posY, WWStates state) {}
+    private WWStates state;
 
-    public WireWorldCell() {
-        state = WWStates.EMPTY;
+    public WireWorldCell(int posX, int posY, WWStates state) {
+        super(posX, posY);
     }
+
+    /*public WireWorldCell() {
+        state = WWStates.EMPTY;
+    }*/
 
     public WWStates getWWState() {
         return state;
     }
 
-    public static void setWWState(WWStates ww) {
+    public void setWWState(WWStates ww) {
         state = ww;
     }
 
