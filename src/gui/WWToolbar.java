@@ -1,15 +1,22 @@
 package gui;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.Property;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 
 import static utils.SpinnerUtilities.initializeSpinner;
@@ -18,9 +25,10 @@ import static utils.SpinnerUtilities.initializeSpinner;
 public class WWToolbar extends StackPane {
 
     @FXML
+    ToggleButton endlessModeSwitch;
+
+    @FXML
     private Spinner<Integer> genNumSpinner, widthSpinner, heightSpinner;
-
-
 
     public WWToolbar(){
 
@@ -36,15 +44,31 @@ public class WWToolbar extends StackPane {
             throw new RuntimeException(e);
         }
 
-        initializeSpinner(heightSpinner);
-        initializeSpinner(widthSpinner);
         initializeSpinner(genNumSpinner);
+        initializeSpinner(widthSpinner);
+        initializeSpinner(heightSpinner);
+
+        genNumSpinner.getValueFactory().valueProperty().addListener((observable, oldValue, newValue) -> {
+            ViewCommunicator.getWWController().setGenNumber(newValue);
+        });
+        widthSpinner.getValueFactory().valueProperty().addListener((observable, oldValue, newValue) -> {
+            ViewCommunicator.getWWController().setBoardWidth(newValue);
+        });
+        heightSpinner.getValueFactory().valueProperty().addListener((observable, oldValue, newValue) -> {
+            ViewCommunicator.getWWController().setBoardHeight(newValue);
+        });
+        endlessModeSwitch.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            ViewCommunicator.getWWController().setEndlessMode(newValue);
+        });
+
 
         ViewCommunicator.setToolbarController(this);
 
+
+
+
+
     }
-
-
     @FXML
     public void goBack(ActionEvent e) throws IOException {
         Parent newParent = FXMLLoader.load(getClass().getResource("resources/MainMenu.fxml"));
@@ -63,15 +87,6 @@ public class WWToolbar extends StackPane {
         setVisible(false);
 
     }
-
-
-
-
-
-
-
-
-
 
 
 

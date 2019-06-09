@@ -45,11 +45,10 @@ public class SpinnerUtilities {
                     Integer value = converter.fromString(text);
 
                     spinner.getValueFactory().setValue(value);
-                    ViewCommunicator.setWWGenNumber(value);
+
                 } else {
                     spinner.getValueFactory().setValue(1);
                     spinner.getValueFactory().setValue(10);
-                    ViewCommunicator.setWWGenNumber(10);
                 }
 
             }

@@ -15,31 +15,12 @@ public class ViewCommunicator {
         ViewCommunicator.TController = TController;
     }
 
-    public static void setWWGenNumber(int value){
-
-        WWController.setGenNumber(value);
-        System.out.println(WWController.getGenNumber());
-
+    public static WWCellViewController getWWController() {
+        return WWController;
     }
 
-    public static void setWWGboardHeight(int value){
-
-        WWController.setBoardHeight(value);
-
-    }
-
-
-    public static void setWWboardWidth(int value){
-
-        WWController.setBoardWidth(value);
-
-    }
-
-
-    public static void setWWEndlessMode(boolean isOn){
-
-        WWController.setEndlessMode(isOn);
-
+    public static WWToolbar getTController() {
+        return TController;
     }
 
 
