@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MainMenu extends Application {
+public class ElohimXApp extends Application {
 
     public static void main(String[] args) {
         launch(args);
