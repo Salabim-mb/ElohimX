@@ -2,11 +2,10 @@ package utils;
 
 import java.io.*;
 
+import core.Cell;
 import core.Generation;
 import core.WWStates;
-import core.WireWorld;
-import core.WireWorldCell;
-import core.Cell;
+import core.GOLStates;
 
 public class TxtWriter {
     private static TxtWriter instance;
@@ -19,77 +18,77 @@ public class TxtWriter {
         return instance;
     }
 
+    private String mayAddDotTxt(String name) {
+        if (!name.endsWith(".txt"))
+            name += ".txt";
+        return name;
+    }
+
     public void writeWW (String filename) throws IOException {
         String textBufferWW = null;
         int rows = Generation.getRows();
         int columns = Generation.getColumns();
+        Cell[][] wwCells = Generation.getCells();
         for (int i=0; i<rows; i++) {
             for (int j=0; j<columns; j++) {
-                WireWorldCell cell = ;
-                Cell[][] wwCells = Generation.getCells();
-                if (wwCells[i][j].get == WWStates.EMPTY) {
+                if (wwCells[i][j].currWWState() == WWStates.EMPTY) {
                     textBufferWW += "0";
                     continue;
-                } else if (wwCells[i][j] == WWStates.CONDUCTOR) {
+                } else if (wwCells[i][j].currWWState() == WWStates.CONDUCTOR) {
                     textBufferWW += "1";
                     continue;
-                } else if (wwCells[i][j] == WWStates.ELECTRON_HEAD) {
+                } else if (wwCells[i][j].currWWState() == WWStates.ELECTRON_HEAD) {
                     textBufferWW += "2";
                     continue;
-                } else if (wwCells[i][j] == WWStates.ELECTRON_TAIL) {
+                } else if (wwCells[i][j].currWWState() == WWStates.ELECTRON_TAIL) {
                     textBufferWW += "3";
                     continue;
                 }
             }
             textBufferWW += "\n";
         }
-        ObjectOutputStream outputStream = null;
-        try {
 
-            outputStream = new ObjectOutputStream(
-                    new BufferedOutputStream(
-                            new FileOutputStream("./" + filename)));
-            outputStream.writeObject(textBufferWW);
+        String filePath = "/" + mayAddDotTxt(filename);
+        FileWriter fileWriter = null;
+
+        try {
+            fileWriter = new FileWriter(filePath);
+            fileWriter.write(textBufferWW);
         } finally {
-            if(outputStream != null) {
-                outputStream.flush();
-                outputStream.close();
+            if (fileWriter != null) {
+                fileWriter.close();
             }
         }
-
     }
 
     public void writeGOL (String filename) throws IOException {
         String textBufferGOL = null;
         int rows = Generation.getRows();
         int columns = Generation.getColumns();
+        Cell[][] golCells = Generation.getCells();
         for (int i=0; i<rows; i++) {
             for (int j=0; j<columns; j++) {
-                WireWorldCell cell = ;
-                int[][] numericGOLCells = Generation.getNumericWWCells();
-                if (numericGOLCells[i][j] == 0) {
+                if (golCells[i][j].currGOLState() == GOLStates.DEAD) {
                     textBufferGOL += "0";
                     continue;
-                } else if (numericGOLCells[i][j] == 1) {
+                } else if (golCells[i][j].currGOLState() == GOLStates.ALIVE) {
                     textBufferGOL += "1";
                     continue;
                 }
             }
             textBufferGOL += "\n";
         }
-        ObjectOutputStream outputStream = null;
-        try {
 
-            outputStream = new ObjectOutputStream(
-                    new BufferedOutputStream(
-                            new FileOutputStream("./" + filename)));
-            outputStream.writeObject(textBufferGOL);
+        String filePath = "/" + mayAddDotTxt(filename);
+        FileWriter fileWriter = null;
+
+        try {
+            fileWriter = new FileWriter(filePath);
+            fileWriter.write(textBufferGOL);
         } finally {
-            if(outputStream != null) {
-                outputStream.flush();
-                outputStream.close();
+            if (fileWriter != null) {
+                fileWriter.close();
             }
         }
-
     }
 }
