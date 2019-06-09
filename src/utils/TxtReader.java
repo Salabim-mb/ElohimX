@@ -8,7 +8,7 @@ public class TxtReader {
 
     private TxtReader instance;
 
-    private TxtReader() { }
+    public TxtReader() { }
 
     public TxtReader getInstance() {
         if (instance == null)
@@ -28,14 +28,15 @@ public class TxtReader {
         BufferedReader reader = new BufferedReader(new FileReader(srcFile));
         int width = 0;
         String str = reader.readLine();
-        return str.length()-1;
+        reader.close();
+        return str.length();
     }
 
     private WireWorldCell[][] strToWWCellArray(String str, int height, int width) {
         WireWorldCell[][] cells = new WireWorldCell[height][width];
         int i=0, r=0, c=0;
         while (i < str.length()) {
-            while (str.charAt(i) != '\n') {
+            while (str.charAt(i) != '\n' && str.charAt(i) != '\0') {
                 switch (str.charAt(i)) {
                     case '0':
                         cells[r][c].setWWState(WWStates.EMPTY);
@@ -60,7 +61,7 @@ public class TxtReader {
         GameOfLifeCell[][] cells = new GameOfLifeCell[height][width];
         int i=0, r=0, c=0;
         while (i < str.length()) {
-            while (str.charAt(i) != '\n') {
+            while (str.charAt(i) != '\n' && str.charAt(i) != '\0') {
                 switch (str.charAt(i)) {
                     case '0':
                         cells[r][c].setGOLState(GOLStates.DEAD);
@@ -79,13 +80,16 @@ public class TxtReader {
 
     public void readWW (File srcFile) throws IOException {
         BufferedReader readBufferWW = null;
-        String str = null;
+        String str = "";
         try {
             int height = getFileLineNumber(srcFile);
             int width = getFileLineLength(srcFile);
             readBufferWW = new BufferedReader(new FileReader(srcFile));
-            while(readBufferWW.readLine() != null)
+            int w=0;
+            while(w < height) {
                 str += readBufferWW.readLine() + "\n";
+                w++;
+            }
             WireWorldCell[][] grid = strToWWCellArray(str, height, width);
             Generation zero = new Generation (0, grid);
         }
@@ -99,13 +103,16 @@ public class TxtReader {
 
     public void readGOL (File srcFile) throws IOException {
         BufferedReader readBufferGOL = null;
-        String str = null;
+        String str = "";
         try {
             int height = getFileLineNumber(srcFile);
             int width = getFileLineLength(srcFile);
             readBufferGOL = new BufferedReader(new FileReader(srcFile));
-            while(readBufferGOL.readLine() != null)
+            int g=0;
+            while(g< height){
                 str += readBufferGOL.readLine() + "\n";
+                g++;
+            }
             GameOfLifeCell[][] grid = strToGOLCellArray(str, height, width);
             Generation zero = new Generation (0, grid);
         }

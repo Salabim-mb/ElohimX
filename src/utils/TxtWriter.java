@@ -11,7 +11,7 @@ import core.GOLStates;
 public class TxtWriter {
     private TxtWriter instance;
 
-    private TxtWriter() { }
+    public TxtWriter() { }
 
     public TxtWriter getInstance() {
         if (instance == null)
@@ -34,16 +34,12 @@ public class TxtWriter {
             for (int j=0; j<columns; j++) {
                 if (wwCells[i][j].getWWState() == WWStates.EMPTY) {
                     textBufferWW += "0";
-                    continue;
                 } else if (wwCells[i][j].getWWState() == WWStates.CONDUCTOR) {
                     textBufferWW += "1";
-                    continue;
                 } else if (wwCells[i][j].getWWState() == WWStates.ELECTRON_HEAD) {
                     textBufferWW += "2";
-                    continue;
                 } else if (wwCells[i][j].getWWState() == WWStates.ELECTRON_TAIL) {
                     textBufferWW += "3";
-                    continue;
                 }
             }
             textBufferWW += "\n";
