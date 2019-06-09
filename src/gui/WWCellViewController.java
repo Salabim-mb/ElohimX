@@ -38,7 +38,8 @@ public class WWCellViewController extends Pane{
     @FXML
     private StackPane cellSP;
 
-
+    @FXML
+    private Button clearButton;
 
 
     public WWCellViewController(){
@@ -61,8 +62,11 @@ public class WWCellViewController extends Pane{
 
 
         board = new CellBoard(10, 10);
-        cellSP.setAlignment(Pos.CENTER);
+        board.setTranslateX(325.0 - board.getWidth()/2);
+        board.setTranslateY(210.0 - board.getHeight()/2);
+
         cellSP.getChildren().add(board);
+
 
         //initializeCells(10, 10, 0);
 
@@ -72,24 +76,6 @@ public class WWCellViewController extends Pane{
 
     }
 
-    /*
-    public void initializeCells(int width, int height, int state){
-
-        cells = new Cell[width*height];
-
-        for(int i = 0; i < cells.length; i++){
-
-            cells[i] = new Cell(20, 20, 0);
-            cells[i].setTranslateX(20*(i % width));
-            cells[i].setTranslateY(20*(i / height));
-
-            cellWindow.getChildren().add(cells[i]);
-
-
-        }
-
-    }
-*/
 
 
 
