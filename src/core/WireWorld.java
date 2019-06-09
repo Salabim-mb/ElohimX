@@ -55,7 +55,7 @@ public class WireWorld {
 
                 }
             }
-            Generation nextGen = new Generation(generations.size(), nextGenBoard);
+            Generation nextGen = new Generation(lastGen.genNumber++, nextGenBoard);
 
             generations.add(nextGen);
 
