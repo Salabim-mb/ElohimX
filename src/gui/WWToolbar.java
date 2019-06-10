@@ -53,9 +53,11 @@ public class WWToolbar extends StackPane {
         });
         widthSpinner.getValueFactory().valueProperty().addListener((observable, oldValue, newValue) -> {
             ViewCommunicator.getWWController().setBoardWidth(newValue);
+            ViewCommunicator.getWWController().resizeBoard();
         });
         heightSpinner.getValueFactory().valueProperty().addListener((observable, oldValue, newValue) -> {
             ViewCommunicator.getWWController().setBoardHeight(newValue);
+            ViewCommunicator.getWWController().resizeBoard();
         });
         endlessModeSwitch.selectedProperty().addListener((observable, oldValue, newValue) -> {
             ViewCommunicator.getWWController().setEndlessMode(newValue);
