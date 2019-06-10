@@ -7,13 +7,13 @@ import javafx.scene.shape.Rectangle;
 
 public class Cell extends Rectangle {
 
-    private static Color[] states = {Color.WHITE, Color.RED, Color.BLUE, Color.BLACK};
+    private static Color[] states = {Color.BLACK, Color.BLUE, Color.RED, Color.YELLOW};
 
 
     public Cell(double height, double width, int i){
 
         super(width, height);
-        setStroke(Color.BLACK);
+        setStroke(Color.GRAY);
         setState(i);
 
         setOnMouseClicked(new EventHandler<MouseEvent>(){

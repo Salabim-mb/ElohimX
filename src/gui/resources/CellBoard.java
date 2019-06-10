@@ -10,7 +10,7 @@ public class CellBoard extends Pane {
 
     public CellBoard(int widthInCells, int heightInCells){
 
-        double dim = widthInCells > heightInCells ?
+        double dim = (widthInCells > heightInCells && widthInCells > 15) ?
             (WWCellViewController.CELL_VIEW_WIDTH/widthInCells) : (WWCellViewController.CELL_VIEW_HEIGHT/heightInCells);
 
         cells = new Cell[widthInCells][heightInCells];
@@ -25,8 +25,6 @@ public class CellBoard extends Pane {
             cells[i][j].setTranslateY(dim*j);
 
             getChildren().add(cells[i][j]);
-
-
         }
 
 
