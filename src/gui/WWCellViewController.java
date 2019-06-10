@@ -6,16 +6,20 @@ import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.canvas.Canvas;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
+
 import java.io.IOException;
 
 
 public class WWCellViewController extends Pane{
+
+    public static final double CELL_VIEW_HEIGHT = 420.0;
+    public static final double CELL_VIEW_WIDTH = 650.0;
 
     private int genNumber;
     private int boardWidth;
@@ -23,7 +27,7 @@ public class WWCellViewController extends Pane{
     private boolean endlessMode;
 
     CellBoard board;
-
+    Group   boardWrapper;
 
 
     @FXML
@@ -36,7 +40,7 @@ public class WWCellViewController extends Pane{
     private WWToolbar toolbar;
 
     @FXML
-    private StackPane cellSP;
+    private StackPane cellWindow;
 
     @FXML
     private Button clearButton;
@@ -60,15 +64,17 @@ public class WWCellViewController extends Pane{
         setBoardWidth(10);
         setEndlessMode(false);
 
+        /*
+        setStyle("-fx-background-color: silver;");
+        cellSP.setStyle("-fx-background-color: white;");
+        genNum.setTextFill(Color.WHITE);    */
 
         board = new CellBoard(10, 10);
-        board.setTranslateX(325.0 - board.getWidth()/2);
-        board.setTranslateY(210.0 - board.getHeight()/2);
+        boardWrapper = new Group(board);
 
-        cellSP.getChildren().add(board);
+        cellWindow.getChildren().add(boardWrapper);
+        StackPane.setAlignment(boardWrapper, Pos.CENTER);
 
-
-        //initializeCells(10, 10, 0);
 
         ViewCommunicator.setWWController(this);
 
@@ -77,7 +83,13 @@ public class WWCellViewController extends Pane{
     }
 
 
+    public void  resizeBoard(){
 
+        boardWrapper.getChildren().remove(board);
+        board = new CellBoard(boardWidth, boardHeight);
+        boardWrapper.getChildren().add(board);
+
+    }
 
     @FXML
     public void showToolbar() {

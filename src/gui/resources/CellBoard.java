@@ -1,27 +1,30 @@
 package gui.resources;
 
+import gui.WWCellViewController;
 import javafx.scene.layout.Pane;
 
 
 public class CellBoard extends Pane {
 
-    private Cell[] cells;
+    private Cell[][] cells;
 
-    public CellBoard(int width, int height){
+    public CellBoard(int widthInCells, int heightInCells){
 
+        double dim = widthInCells > heightInCells ?
+            (WWCellViewController.CELL_VIEW_WIDTH/widthInCells) : (WWCellViewController.CELL_VIEW_HEIGHT/heightInCells);
 
-        setWidth(20*width);
-        setHeight(20*height);
-        //double dim = width > height ? (650.0/width) : (420.0/height);
-        cells = new Cell[width*height];
+        cells = new Cell[widthInCells][heightInCells];
 
-        for(int i = 0; i < cells.length; i++){
+        setWidth(dim*widthInCells);
+        setHeight(dim*heightInCells);
 
-            cells[i] = new Cell(20, 20, 0);
-            cells[i].setTranslateX(20*(i % width));
-            cells[i].setTranslateY(20*(i / height));
+        for(int i = 0; i < widthInCells; i++)
+            for(int j =0; j < heightInCells; j++){
+            cells[i][j] = new Cell(dim, dim, 0);
+            cells[i][j].setTranslateX(dim*i);
+            cells[i][j].setTranslateY(dim*j);
 
-            getChildren().add(cells[i]);
+            getChildren().add(cells[i][j]);
 
 
         }
@@ -30,11 +33,11 @@ public class CellBoard extends Pane {
     }
 
 
-    public void setCells(Cell[] cells){
+    public void setCells(Cell[][] cells){
         this.cells = cells;
     }
 
-    public Cell[] getCells(){
+    public Cell[][] getCells(){
         return cells;
     }
 }
