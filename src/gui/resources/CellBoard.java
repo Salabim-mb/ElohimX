@@ -1,17 +1,28 @@
 package gui.resources;
 
-import gui.WWCellViewController;
+
 import javafx.scene.layout.Pane;
+
+import static gui.WWCellViewController.CELL_VIEW_HEIGHT;
+import static gui.WWCellViewController.CELL_VIEW_WIDTH;
 
 
 public class CellBoard extends Pane {
 
+
+
     private Cell[][] cells;
+
 
     public CellBoard(int widthInCells, int heightInCells){
 
-        double dim = (widthInCells > heightInCells && widthInCells > 15) ?
-            (WWCellViewController.CELL_VIEW_WIDTH/widthInCells) : (WWCellViewController.CELL_VIEW_HEIGHT/heightInCells);
+
+        double divisorW = CELL_VIEW_WIDTH/widthInCells;
+        double divisorH = CELL_VIEW_HEIGHT/heightInCells;
+
+
+        double dim = (divisorW*heightInCells > CELL_VIEW_HEIGHT) ?
+            (divisorH) : (divisorW);
 
         cells = new Cell[widthInCells][heightInCells];
 
@@ -38,4 +49,6 @@ public class CellBoard extends Pane {
     public Cell[][] getCells(){
         return cells;
     }
+
+
 }
