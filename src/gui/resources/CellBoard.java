@@ -31,7 +31,7 @@ public class CellBoard extends Pane {
 
         for(int i = 0; i < widthInCells; i++)
             for(int j =0; j < heightInCells; j++){
-            cells[i][j] = new Cell(dim, dim, 0);
+            cells[i][j] = new Cell(dim,0);
             cells[i][j].setTranslateX(dim*i);
             cells[i][j].setTranslateY(dim*j);
 

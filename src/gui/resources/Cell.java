@@ -10,10 +10,11 @@ public class Cell extends Rectangle {
     private static Color[] states = {Color.BLACK, Color.BLUE, Color.RED, Color.YELLOW};
 
 
-    public Cell(double height, double width, int i){
+    public Cell(double dim, int i){
 
-        super(width, height);
-        setStroke(Color.GRAY);
+        super(dim, dim);
+        setStroke(Color.WHITE);
+        setStrokeWidth(0.01 * dim);
         setState(i);
 
         setOnMouseClicked(new EventHandler<MouseEvent>(){
