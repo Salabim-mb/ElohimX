@@ -1,15 +1,16 @@
 package core;
 
 import java.util.ArrayList;
-import core.Cell;
+import java.util.List;
+
 
 public class WireWorld {
 
     private static WireWorld instance;
-    private ArrayList<Generation> generations;
+    private List<Generation> generations;
 
     private WireWorld(){
-        //zero = new Generation(0, wwCell);
+        generations = new ArrayList<>();
     }
 
     public static WireWorld getInstance(){
@@ -23,6 +24,16 @@ public class WireWorld {
             return true;
         return false;
     }
+
+    public void initializeWW(Generation genZero){
+
+        if (!generations.isEmpty())
+            generations.clear();
+
+        generations.add(genZero);
+
+    }
+
 
     public void runWireWorld() {
         if(!generations.isEmpty()){
@@ -55,7 +66,7 @@ public class WireWorld {
 
                 }
             }
-            Generation nextGen = new Generation(lastGen.genNumber++, nextGenBoard);
+            Generation nextGen = new Generation(lastGen.getGenNumber()+1, nextGenBoard);
 
             generations.add(nextGen);
 

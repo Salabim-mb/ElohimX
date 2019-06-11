@@ -1,13 +1,17 @@
 package core;
 
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameOfLife {
 
     private static GameOfLife instance;
-    private ArrayList<Generation> generations;
+    private List<Generation> generations;
 
-    private GameOfLife(){}
+    private GameOfLife(){
+        generations = new ArrayList<>();
+    }
 
     public static GameOfLife getInstance(){
         if(instance == null)
@@ -56,7 +60,7 @@ public class GameOfLife {
                 }
             }
 
-            Generation nextGen = new Generation(lastGen.genNumber++, nextGenBoard);
+            Generation nextGen = new Generation(lastGen.getGenNumber()+1, nextGenBoard);
 
             generations.add(nextGen);
 
