@@ -16,13 +16,13 @@ public class CellBoard extends Pane {
 
     public CellBoard(int widthInCells, int heightInCells){
 
-
         double divisorW = CELL_VIEW_WIDTH/widthInCells;
         double divisorH = CELL_VIEW_HEIGHT/heightInCells;
 
 
         double dim = (divisorW*heightInCells > CELL_VIEW_HEIGHT) ?
             (divisorH) : (divisorW);
+       
 
         cells = new Cell[widthInCells][heightInCells];
 
@@ -37,10 +37,7 @@ public class CellBoard extends Pane {
 
             getChildren().add(cells[i][j]);
         }
-
-
     }
-
 
     public void setCells(Cell[][] cells){
         this.cells = cells;
