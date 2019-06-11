@@ -1,9 +1,8 @@
 package gui;
 
-import gui.resources.Cell;
+
 import gui.resources.CellBoard;
 import javafx.fxml.FXML;
-
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -98,6 +97,7 @@ public class WWCellViewController extends Pane{
 
 
     }
+
 
 
     public int getGenNumber() {
