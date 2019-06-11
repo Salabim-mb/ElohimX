@@ -6,14 +6,17 @@
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.Pane?>
 <?import gui.WWToolbar?>
-<?import javafx.scene.layout.StackPane?>
+
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.shape.Circle?>
 <fx:root type="javafx.scene.layout.Pane" fx:id="mainPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" >
 
       <ScrollPane fx:id="cellWindow" prefHeight="420.0" prefWidth="650.0" layoutX="75.0" layoutY="70.0" style="-fx-border-color: black; -fx-border-width: 2;"/>
       <Button layoutX="455.0" layoutY="520.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="60.0" text="Next" />
-      <Label fx:id="genNum" layoutX="72.0" layoutY="45.0" text="Gen Num" />
-      <Button fx:id="clearButton" layoutX="70.0" layoutY="550.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Clear" />
+      <Label fx:id="genNumLabel" layoutX="25.0" layoutY="40.0" text="Gen Num" textFill="white"  />
+      <Circle  fill="yellow" layoutX="110.0" layoutY="50.0" radius="15.0"/>
+      <Label fx:id="genIndex" layoutX="107.0" layoutY="41.0" text="0" textFill="black" />
+      <Button fx:id="clearButton" onAction="#clearBoard" layoutX="70.0" layoutY="550.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Clear" />
       <Button layoutX="285.0" layoutY="520.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="60.0" text="Last" />
       <ToggleButton layoutX="375.0" layoutY="540.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" text="Run" />
       <Slider layoutX="590.0" layoutY="556.0" />

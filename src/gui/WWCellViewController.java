@@ -2,6 +2,10 @@ package gui;
 
 
 import gui.resources.CellBoard;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
@@ -14,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 
 import java.io.IOException;
@@ -24,7 +29,7 @@ public class WWCellViewController extends Pane{
     public static final double CELL_VIEW_HEIGHT = 420.0;
     public static final double CELL_VIEW_WIDTH = 650.0;
 
-    private double scaleValue = 1.0;
+    private double scaleValue = 0.9;
     private double zoomIntensity = 0.02;
     private Node target;
     private Node zoomNode;
@@ -34,12 +39,17 @@ public class WWCellViewController extends Pane{
     private int boardHeight;
     private boolean endlessMode;
 
+    private StringProperty currentGen;
+
     CellBoard board;
     Group   boardWrapper;
 
 
     @FXML
-    Label genNum;
+    Label genNumLabel;
+
+    @FXML
+    Label genIndex;
 
     @FXML
     private Button showButton;
@@ -71,6 +81,10 @@ public class WWCellViewController extends Pane{
         setBoardHeight(10);
         setBoardWidth(10);
         setEndlessMode(false);
+        currentGen = new SimpleStringProperty("0");
+        genIndex.textProperty().bind(currentGen);
+
+        genNumLabel.setFont(Font.font(13.5));
 
         board = new CellBoard(10, 10);
         boardWrapper = new Group(board);
@@ -87,6 +101,7 @@ public class WWCellViewController extends Pane{
         cellWindow.setFitToWidth(true);
         updateScale();
 
+        setStyle("-fx-background-color: indigo");
         ViewCommunicator.setWWController(this);
 
     }
@@ -97,8 +112,15 @@ public class WWCellViewController extends Pane{
         boardWrapper.getChildren().remove(board);
         board = new CellBoard(boardWidth, boardHeight);
         target = board;
+        scaleValue = 0.9;
+        updateScale();
         boardWrapper.getChildren().add(board);
 
+    }
+
+    @FXML
+    public void clearBoard(){
+        resizeBoard();
     }
 
     @FXML

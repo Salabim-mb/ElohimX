@@ -9,31 +9,24 @@ public class Cell extends Rectangle {
 
     private static Color[] states = {Color.BLACK, Color.BLUE, Color.RED, Color.YELLOW};
 
-
-    public Cell(double dim, int i){
+    public Cell(double dim, int index){
 
         super(dim, dim);
         setStroke(Color.WHITE);
-        setStrokeWidth(0.01 * dim);
-        setState(i);
+        setStrokeWidth(0.015 * dim);
+        setState(index);
 
-        setOnMouseClicked(new EventHandler<MouseEvent>(){
-
-            @Override
-            public void handle(MouseEvent e){
-
-                for(int i=0; i < states.length; i++) {
-                    if ((getState() == states[i]) && i!=3){
-                        setState(i+1);
-                        break;
-                    }
-                    if ((getState() == states[i]) && i==3){
-                        setState(0);
-                        break;
-                    }
-                }
-            }
+        setOnMouseClicked(e-> {
+            changeState();
        });
+
+        setOnMouseEntered(e-> {
+            setStroke(Color.ORANGE);
+        });
+
+        setOnMouseExited(e-> {
+            setStroke(Color.WHITE);
+        });
 
     }
 
@@ -45,6 +38,21 @@ public class Cell extends Rectangle {
         }
 
     }
+
+    public void changeState(){
+
+        for(int i=0; i < states.length; i++) {
+            if ((getState() == states[i]) && i!=3){
+                setState(i+1);
+                break;
+            }
+            if ((getState() == states[i]) && i==3){
+                setState(0);
+                break;
+            }
+        }
+    }
+
 
     public Color getState(){
         return (Color) getFill();

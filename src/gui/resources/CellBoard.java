@@ -37,6 +37,8 @@ public class CellBoard extends Pane {
 
             getChildren().add(cells[i][j]);
         }
+
+
     }
 
     public void setCells(Cell[][] cells){
