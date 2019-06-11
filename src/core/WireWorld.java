@@ -9,7 +9,7 @@ public class WireWorld {
     private static WireWorld instance;
     private List<Generation> generations;
 
-    private WireWorld(){
+    public WireWorld(){
         generations = new ArrayList<>();
     }
 
@@ -42,9 +42,10 @@ public class WireWorld {
             int height = lastGen.getRows();
             int width = lastGen.getColumns();
             WireWorldCell[][] nextGenBoard = new WireWorldCell[height][width];
-            int cellCounter = 0;
             for (int r=0; r<height; r++) {
+                nextGenBoard[r] = new WireWorldCell[width];
                 for (int c = 0; c < width; c++) {
+                    nextGenBoard[r][c] = new WireWorldCell(WWStates.EMPTY);
                     if (lastGenBoard[r][c].getWWState() == WWStates.ELECTRON_HEAD)
                         nextGenBoard[r][c].setWWState(WWStates.ELECTRON_TAIL);
                     else if (lastGenBoard[r][c].getWWState() == WWStates.ELECTRON_TAIL)
