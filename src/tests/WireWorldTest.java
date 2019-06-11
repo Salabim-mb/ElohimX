@@ -1,9 +1,12 @@
-package core;
+package tests;
 
+import core.Generation;
+import core.WWStates;
 import core.WireWorld;
 import java.util.List;
 
-import org.junit.Test;
+import core.WireWorldCell;
+import org.junit.jupiter.api.Test;
 
 public class WireWorldTest {
     private List<Generation> generations;

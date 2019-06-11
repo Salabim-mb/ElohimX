@@ -1,6 +1,4 @@
-package Tests;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+package tests;
 
 import core.*;
 import utils.TxtReader;
@@ -15,7 +13,7 @@ public class TxtReaderTest {
     @Test
     public void shouldReturnWWGrid() throws IOException {
         WireWorldCell[][] cells = new WireWorldCell[1][1];
-        cells[0][0] = new WireWorldCell(0,0,WWStates.EMPTY);
+        cells[0][0] = new WireWorldCell(WWStates.EMPTY);
         Generation zero = new Generation(0, cells);
 
         test.readWW(fileww);
@@ -25,7 +23,7 @@ public class TxtReaderTest {
     @Test
     public void shouldReturnGOLGrid() throws IOException {
         GameOfLifeCell[][] cells = new GameOfLifeCell[1][1];
-        cells[0][0] = new GameOfLifeCell(0,0,GOLStates.DEAD);
+        cells[0][0] = new GameOfLifeCell(GOLStates.DEAD);
         Generation zero = new Generation(0, cells);
 
         test.readGOL(filegol);

@@ -5,8 +5,8 @@ public class GameOfLifeCell extends Cell{
 
     private GOLStates state;
 
-    public GameOfLifeCell() {
-        state = GOLStates.DEAD;
+    public GameOfLifeCell(GOLStates state) {
+        this.state = state;
     }
 
 

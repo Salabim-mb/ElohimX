@@ -1,4 +1,4 @@
-package Tests;
+package tests;
 
 
 import core.*;
@@ -16,8 +16,8 @@ public class TxtWriterTest {
 
         Generation lastGen = new Generation(0, cells);
         WireWorldCell[][] wwcells = new WireWorldCell[1][1];
-        wwcells[0][0] = new WireWorldCell(0,0,WWStates.ELECTRON_TAIL);
-        lastGen.cells = wwcells;
+        wwcells[0][0] = new WireWorldCell(WWStates.ELECTRON_TAIL);
+        lastGen.setCells(wwcells);
         test.writeWW(filename, lastGen);
     }
 
@@ -28,8 +28,8 @@ public class TxtWriterTest {
 
         Generation lastGen = new Generation(0, cells);
         GameOfLifeCell[][] golcells = new GameOfLifeCell[1][1];
-        golcells[0][0] = new GameOfLifeCell(0,0,GOLStates.DEAD);
-        lastGen.cells = golcells;
+        golcells[0][0] = new GameOfLifeCell(GOLStates.DEAD);
+        lastGen.setCells(golcells);
         test.writeGOL(filename, lastGen);
     }
 }

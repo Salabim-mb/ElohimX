@@ -89,7 +89,7 @@
                 <Insets left="160.0" right="70.0" top="350.0" />
             </StackPane.margin>
         </Label>
-        <Button fx:id="helpButton" mnemonicParsing="false" text="Help..." StackPane.alignment="BOTTOM_RIGHT">
+        <Button fx:id="helpButton" onAction="#showHelpWindow" mnemonicParsing="false" text="Help..." StackPane.alignment="BOTTOM_RIGHT">
             <StackPane.margin>
                 <Insets bottom="20.0" right="20.0" />
             </StackPane.margin>
