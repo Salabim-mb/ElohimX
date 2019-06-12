@@ -36,20 +36,26 @@ public class TxtReader {
         WireWorldCell[][] cells = new WireWorldCell[height][width];
         int i=0, r=0, c=0;
         while (i < str.length()) {
-            while (str.charAt(i) != '\n' && str.charAt(i) != '\0') {
-                switch (str.charAt(i)) {
-                    case '0':
-                        cells[r][c].setWWState(WWStates.EMPTY);
-                    case '1':
-                        cells[r][c].setWWState(WWStates.CONDUCTOR);
-                    case '2':
-                        cells[r][c].setWWState(WWStates.ELECTRON_HEAD);
-                    case '3':
-                        cells[r][c].setWWState(WWStates.ELECTRON_TAIL);
-                    default:
-                }
+            if (str.charAt(i) == '\n') {
                 i++;
-                c++;
+            } else {
+                cells[r] = new WireWorldCell[width];
+                while (str.charAt(i) != '\n' && str.charAt(i) != '\0') {
+                    cells[r][c] = new WireWorldCell(WWStates.EMPTY);
+                    switch (str.charAt(i)) {
+                        case '0':
+                            cells[r][c].setWWState(WWStates.EMPTY);
+                        case '1':
+                            cells[r][c].setWWState(WWStates.CONDUCTOR);
+                        case '2':
+                            cells[r][c].setWWState(WWStates.ELECTRON_HEAD);
+                        case '3':
+                            cells[r][c].setWWState(WWStates.ELECTRON_TAIL);
+                        default:
+                    }
+                    i++;
+                    c++;
+                }
             }
             c=0;
             r++;
