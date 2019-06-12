@@ -1,4 +1,7 @@
-package gui;
+package gui.resources.guiUtilities;
+
+import gui.WWCellViewController;
+import gui.WWToolbar;
 
 public class ViewCommunicator {
 

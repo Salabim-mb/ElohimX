@@ -3,6 +3,7 @@ package gui;
 
 import core.Generation;
 import core.WireWorld;
+import gui.resources.guiUtilities.ViewCommunicator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,10 +22,9 @@ import utils.TxtWriter;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 
-import static utils.SpinnerUtilities.initializeSpinner;
+import static gui.resources.guiUtilities.SpinnerUtilities.initializeSpinner;
 
 
 public class WWToolbar extends StackPane {
@@ -32,8 +32,6 @@ public class WWToolbar extends StackPane {
     private Desktop desktop;
     private FileChooser fileExplorer;
     private WireWorld wireWorld;
-    Generation genZero;
-    private int currentGen;
 
 
     @FXML
@@ -84,7 +82,6 @@ public class WWToolbar extends StackPane {
         fileExplorer.getExtensionFilters().add(new FileChooser.ExtensionFilter(".txt", "*.txt"));
 
         wireWorld = WireWorld.getInstance();
-        currentGen = 0;
         ViewCommunicator.setToolbarController(this);
     }
     @FXML
@@ -163,6 +160,7 @@ public class WWToolbar extends StackPane {
         File file = fileExplorer.showSaveDialog(window);
         if (file != null) {
             try {
+                int currentGen = ViewCommunicator.getWWController().getCurrentGen();
                 TxtWriter.writeWW(file.getPath(), wireWorld.getGenerations().get(currentGen));
             } catch (IOException ex){
                 throw new RuntimeException(ex);

@@ -1,26 +1,20 @@
 package gui;
 
-
+import core.Generation;
+import core.WireWorld;
 import gui.resources.CellBoard;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import gui.resources.guiUtilities.ScrollFunctions;
+import gui.resources.guiUtilities.ViewCommunicator;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
-import javafx.geometry.Point2D;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-
-
 import java.io.IOException;
 
 
@@ -29,21 +23,19 @@ public class WWCellViewController extends Pane{
     public static final double CELL_VIEW_HEIGHT = 420.0;
     public static final double CELL_VIEW_WIDTH = 650.0;
 
-    private double scaleValue = 0.9;
-    private double zoomIntensity = 0.02;
-    private Node target;
-    private Node zoomNode;
-
+    private WireWorld wireWorld;
+    private ScrollFunctions scrollConfig;
     private int genNumber;
     private int boardWidth;
     private int boardHeight;
     private boolean endlessMode;
 
-    private StringProperty currentGen;
+    private StringProperty currentGenProperty;
+    private Generation genZero;
+    private int currentGen;
 
     CellBoard board;
     Group   boardWrapper;
-
 
     @FXML
     Label genNumLabel;
@@ -81,27 +73,20 @@ public class WWCellViewController extends Pane{
         setBoardHeight(10);
         setBoardWidth(10);
         setEndlessMode(false);
-        currentGen = new SimpleStringProperty("0");
-        genIndex.textProperty().bind(currentGen);
+        currentGen = 0;
+        //initializeGenZero();
+
+        currentGenProperty = new SimpleStringProperty("0");
+        genIndex.textProperty().bind(currentGenProperty);
 
         genNumLabel.setFont(Font.font(13.5));
 
         board = new CellBoard(10, 10);
         boardWrapper = new Group(board);
-
-        target = board;
-        zoomNode = boardWrapper;
-
-        cellWindow.setContent(returnOuterNode(zoomNode));
-        cellWindow.setPannable(true);
-        cellWindow.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        cellWindow.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-
-        cellWindow.setFitToHeight(true);
-        cellWindow.setFitToWidth(true);
-        updateScale();
+        scrollConfig = new ScrollFunctions(board, boardWrapper, cellWindow);
 
         //setStyle("-fx-background-color: indigo");
+        wireWorld = WireWorld.getInstance();
         ViewCommunicator.setWWController(this);
 
     }
@@ -111,10 +96,11 @@ public class WWCellViewController extends Pane{
 
         boardWrapper.getChildren().remove(board);
         board = new CellBoard(boardWidth, boardHeight);
-        target = board;
-        scaleValue = 0.9;
-        updateScale();
+        scrollConfig.setTarget(board);
+        scrollConfig.setScaleValue(0.9);
+        scrollConfig.updateScale();
         boardWrapper.getChildren().add(board);
+        //initializeGenZero();
 
     }
 
@@ -129,55 +115,6 @@ public class WWCellViewController extends Pane{
         toolbar.setVisible(true);
 
 
-    }
-
-    private Node returnCenteredNode(Node node){
-
-        VBox box = new VBox(node);
-        box.setAlignment(Pos.CENTER);
-        return box;
-    }
-
-    private Node returnOuterNode(Node node){
-
-        Node outerNode = returnCenteredNode(node);
-
-        outerNode.setOnScroll(e -> {
-
-            //if(e.isControlDown()){
-                e.consume();
-                onScroll(e.getTextDeltaY(), new Point2D(e.getX(), e.getY()));
-            //}
-        });
-
-        return outerNode;
-    }
-
-    private void updateScale() {
-        target.setScaleX(scaleValue);
-        target.setScaleY(scaleValue);
-    }
-
-    private void onScroll(double wheelDelta, Point2D mousePoint) {
-        double zoomFactor = Math.exp(wheelDelta * zoomIntensity);
-
-        Bounds innerBounds = zoomNode.getLayoutBounds();
-        Bounds viewportBounds = cellWindow.getViewportBounds();
-
-        double valX = cellWindow.getHvalue() * (innerBounds.getWidth() - viewportBounds.getWidth());
-        double valY = cellWindow.getVvalue() * (innerBounds.getHeight() - viewportBounds.getHeight());
-
-        scaleValue = scaleValue * zoomFactor;
-        updateScale();
-        cellWindow.layout();
-
-        Point2D posInZoomTarget = target.parentToLocal(zoomNode.parentToLocal(mousePoint));
-
-        Point2D adjustment = target.getLocalToParentTransform().deltaTransform(posInZoomTarget.multiply(zoomFactor - 1));
-
-        Bounds updatedInnerBounds = zoomNode.getBoundsInLocal();
-        cellWindow.setHvalue((valX + adjustment.getX()) / (updatedInnerBounds.getWidth() - viewportBounds.getWidth()));
-        cellWindow.setVvalue((valY + adjustment.getY()) / (updatedInnerBounds.getHeight() - viewportBounds.getHeight()));
     }
 
     public int getGenNumber() {
@@ -211,4 +148,25 @@ public class WWCellViewController extends Pane{
     public void setEndlessMode(boolean endlessMode) {
         this.endlessMode = endlessMode;
     }
+
+    public int getCurrentGen() {
+        return currentGen;
+    }
+
+/*
+    private void initializeGenZero(){
+
+        WireWorldCell[][] cells = new WireWorldCell[boardHeight][boardWidth];
+
+        for (int i=0; i<boardHeight; i++){
+            for(int j=0; j<boardWidth; j++){
+                cells[i][j] = new WireWorldCell(WWStates.EMPTY);
+            }
+
+        }
+
+        genZero = new Generation(0, cells);
+    }
+ */
+
 }

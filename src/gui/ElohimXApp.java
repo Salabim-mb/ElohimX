@@ -1,6 +1,7 @@
 package gui;
 
 import core.WireWorld;
+import gui.resources.guiUtilities.ViewCommunicator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

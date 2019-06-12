@@ -1,13 +1,10 @@
-package utils;
+package gui.resources.guiUtilities;
 
-import gui.ViewCommunicator;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.util.StringConverter;
-
-import javax.swing.text.View;
 
 public class SpinnerUtilities {
 
@@ -56,18 +53,18 @@ public class SpinnerUtilities {
     }
 
 
+    public static class ToIntConverter extends StringConverter<Integer>{
+
+            @Override
+            public String toString(Integer object) {
+                return object + "";
+            }
+
+            @Override
+            public Integer fromString(String string) {
+                return Integer.parseInt(string);
+            }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 }
