@@ -51,6 +51,8 @@ public class TxtWriter {
         try {
             fileWriter = new FileWriter(filePath);
             fileWriter.write(textBufferWW);
+        } catch (IOException e) {
+            e.printStackTrace();
         } finally {
             if (fileWriter != null) {
                 fileWriter.close();
