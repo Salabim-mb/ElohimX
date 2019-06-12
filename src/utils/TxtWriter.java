@@ -9,23 +9,14 @@ import core.WWStates;
 import core.GOLStates;
 
 public class TxtWriter {
-    private TxtWriter instance;
 
-    public TxtWriter() { }
-
-    public TxtWriter getInstance() {
-        if (instance == null)
-            instance = new TxtWriter();
-        return instance;
-    }
-
-    private String mayAddDotTxt(String name) {
+    private static String mayAddDotTxt(String name) {
         if (!name.endsWith(".txt"))
             name += ".txt";
         return name;
     }
 
-    public void writeWW (String filename, Generation lastGen) throws IOException {
+    public static void writeWW (String filename, Generation lastGen) throws IOException {
         String textBufferWW = null;
         int rows = lastGen.getRows();
         int columns = lastGen.getColumns();
@@ -60,7 +51,7 @@ public class TxtWriter {
         }
     }
 
-    public void writeGOL (String filename, Generation lastGen) throws IOException {
+    public static void writeGOL (String filename, Generation lastGen) throws IOException {
         String textBufferGOL = null;
         int rows = lastGen.getRows();
         int columns = lastGen.getColumns();

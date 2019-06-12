@@ -8,26 +8,29 @@ import javafx.scene.shape.Rectangle;
 public class Cell extends Rectangle {
 
     private static Color[] states = {Color.BLACK, Color.BLUE, Color.RED, Color.YELLOW};
-    //public static Color borderColor = Color.BLACK;
-
+    private double stroke;
 
     public Cell(double dim, int index){
 
         super(dim, dim);
-        setStroke(Color.WHITE);
-        setStrokeWidth(0.015*dim);
+        setStroke(Color.BLACK);
+        stroke = 0.015*dim;
+        setStrokeWidth(stroke);
         setState(index);
+        setEffect(null);
 
         setOnMouseClicked(e-> {
             changeState();
        });
 
         setOnMouseEntered(e-> {
+            setStrokeWidth(stroke*1.5);
             setStroke(Color.ORANGE);
         });
 
         setOnMouseExited(e-> {
-            setStroke(Color.WHITE);
+            setStrokeWidth(stroke);
+            setStroke(Color.BLACK);
         });
 
     }

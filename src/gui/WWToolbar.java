@@ -1,6 +1,8 @@
 package gui;
 
 
+import core.Generation;
+import core.WireWorld;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,15 +11,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import utils.TxtReader;
+import utils.TxtWriter;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 
 import static utils.SpinnerUtilities.initializeSpinner;
@@ -27,6 +31,9 @@ public class WWToolbar extends StackPane {
 
     private Desktop desktop;
     private FileChooser fileExplorer;
+    private WireWorld wireWorld;
+    Generation genZero;
+    private int currentGen;
 
 
     @FXML
@@ -76,6 +83,8 @@ public class WWToolbar extends StackPane {
         );
         fileExplorer.getExtensionFilters().add(new FileChooser.ExtensionFilter(".txt", "*.txt"));
 
+        wireWorld = WireWorld.getInstance();
+        currentGen = 0;
         ViewCommunicator.setToolbarController(this);
     }
     @FXML
@@ -133,14 +142,34 @@ public class WWToolbar extends StackPane {
     public void loadFile(ActionEvent e){
 
         Stage window = (Stage)((Node) e.getSource()).getScene().getWindow();
+        Generation genZero = null;
         File file = fileExplorer.showOpenDialog(window);
         if (file != null) {
             openFile(file);
+            try {
+                genZero = TxtReader.readWW(file);
+                wireWorld.initializeWW(genZero);
+            } catch (IOException ex){
+                throw new RuntimeException(ex);
+            }
         }
 
     }
 
+    @FXML
+    public void saveFile(ActionEvent e){
 
+        Stage window = (Stage)((Node) e.getSource()).getScene().getWindow();
+        File file = fileExplorer.showSaveDialog(window);
+        if (file != null) {
+            try {
+                TxtWriter.writeWW(file.getPath(), wireWorld.getGenerations().get(currentGen));
+            } catch (IOException ex){
+                throw new RuntimeException(ex);
+            }
+        }
+
+    }
 
 
 

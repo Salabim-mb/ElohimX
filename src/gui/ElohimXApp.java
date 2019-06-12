@@ -1,5 +1,6 @@
 package gui;
 
+import core.WireWorld;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,9 +19,10 @@ public class ElohimXApp extends Application {
     public void start(Stage primaryStage) throws IOException {
 
         ViewCommunicator communicator = new ViewCommunicator();
+        WireWorld wireWorld = WireWorld.getInstance();
 
         Parent root = FXMLLoader.load(getClass().getResource("resources/MainMenu.fxml"));
-        root.setStyle("-fx-background-color: indigo");
+        //root.setStyle("-fx-background-color: indigo");
         primaryStage.setTitle("ElohimX");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);

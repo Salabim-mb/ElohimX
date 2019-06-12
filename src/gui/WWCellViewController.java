@@ -101,7 +101,7 @@ public class WWCellViewController extends Pane{
         cellWindow.setFitToWidth(true);
         updateScale();
 
-        setStyle("-fx-background-color: indigo");
+        //setStyle("-fx-background-color: indigo");
         ViewCommunicator.setWWController(this);
 
     }
@@ -144,10 +144,10 @@ public class WWCellViewController extends Pane{
 
         outerNode.setOnScroll(e -> {
 
-            if(e.isControlDown()){
+            //if(e.isControlDown()){
                 e.consume();
                 onScroll(e.getTextDeltaY(), new Point2D(e.getX(), e.getY()));
-            }
+            //}
         });
 
         return outerNode;

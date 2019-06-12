@@ -13,7 +13,7 @@
 
       <ScrollPane fx:id="cellWindow" prefHeight="420.0" prefWidth="650.0" layoutX="75.0" layoutY="70.0" style="-fx-border-color: black; -fx-border-width: 2;"/>
       <Button layoutX="455.0" layoutY="520.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="60.0" text="Next" />
-      <Label fx:id="genNumLabel" layoutX="25.0" layoutY="40.0" text="Gen Num" textFill="white"  />
+      <Label fx:id="genNumLabel" layoutX="25.0" layoutY="40.0" text="Gen Num" textFill="black"  />
       <Circle  fill="yellow" layoutX="110.0" layoutY="50.0" radius="15.0"/>
       <Label fx:id="genIndex" layoutX="107.0" layoutY="41.0" text="0" textFill="black" />
       <Button fx:id="clearButton" onAction="#clearBoard" layoutX="70.0" layoutY="550.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Clear" />
