@@ -19,9 +19,9 @@ public class WireWorldCell extends Cell{
         state = ww;
     }
 
-    public String stateToString(WireWorldCell cell) {
+    public String stateToString() {
 
-        switch(cell.getWWState()) {
+        switch(this.getWWState()) {
             case EMPTY: return "EMPTY";
             case CONDUCTOR: return "CONDUCTOR";
             case ELECTRON_HEAD: return "ELECTRON_HEAD";
