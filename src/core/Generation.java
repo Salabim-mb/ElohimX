@@ -11,6 +11,11 @@ public class Generation{
         this.setCells(cells);
     }
 
+    public Generation (int genNumber, WireWorldCell[][] cells){
+        this.genNumber = genNumber;
+        this.setCells(cells);
+    }
+
     public Cell[][] getCells() {
         return cells;
     }

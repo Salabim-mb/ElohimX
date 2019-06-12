@@ -18,7 +18,7 @@
       <Label fx:id="genIndex" layoutX="107.0" layoutY="41.0" text="0" textFill="black" />
       <Button fx:id="clearButton" onAction="#clearBoard" layoutX="70.0" layoutY="550.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Clear" />
       <Button layoutX="285.0" layoutY="520.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="60.0" text="Last" />
-      <ToggleButton layoutX="375.0" layoutY="540.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" text="Run" />
+      <ToggleButton fx:id="runButton" onAction="#runAutomaton" layoutX="375.0" layoutY="540.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" text="Run" />
       <Slider layoutX="590.0" layoutY="556.0" />
       <Button fx:id="showButton" layoutX="710.0" layoutY="20.0" mnemonicParsing="false" onAction="#showToolbar" prefHeight="25.0" prefWidth="70.0" text="Options..." />
       <WWToolbar fx:id="toolbar" visible="false" layoutX="500"/>

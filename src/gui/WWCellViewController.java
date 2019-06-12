@@ -1,5 +1,6 @@
 package gui;
 
+import core.Generation;
 import core.WWStates;
 import core.WireWorld;
 import core.WireWorldCell;
@@ -7,8 +8,11 @@ import gui.resources.CellBoard;
 import gui.resources.RecCell;
 import gui.resources.guiUtilities.ScrollFunctions;
 import gui.resources.guiUtilities.ViewCommunicator;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -16,9 +20,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import java.io.IOException;
-
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 
 public class WWCellViewController extends Pane{
@@ -32,9 +39,11 @@ public class WWCellViewController extends Pane{
     private int boardWidth;
     private int boardHeight;
     private boolean endlessMode;
+    Service<Void> service;
 
     private StringProperty currentGenProperty;
     private WireWorldCell[][] genZero;
+    private Generation current;
     private int currentGen;
 
     CellBoard board;
@@ -92,6 +101,7 @@ public class WWCellViewController extends Pane{
         board.initializeRecCells(genZero, boardHeight, boardWidth);
         scrollConfig = new ScrollFunctions(board, boardWrapper, cellWindow);
 
+        current = new Generation(0, genZero);
         //setStyle("-fx-background-color: indigo");
         wireWorld = WireWorld.getInstance();
         ViewCommunicator.setWWController(this);
@@ -125,6 +135,16 @@ public class WWCellViewController extends Pane{
 
 
     }
+
+    @FXML
+    public void runAutomaton(){
+
+            wireWorld.initializeWW(current);
+            initializeService();
+            service.start();
+
+    }
+
 
     public int getGenNumber() {
         return genNumber;
@@ -174,6 +194,60 @@ public class WWCellViewController extends Pane{
         }
     }
 
+    private void showGeneration(){
 
+        WireWorldCell[][] cells = (WireWorldCell[][]) current.getCells();
+        for(int i=0; i<boardHeight; i++)
+            for(int j=0; j<boardWidth; j++){
+
+                switch (cells[i][j].getWWState()){
+                    case EMPTY:
+                       recCells[i][j].setFill(Color.BLACK);
+                        break;
+                    case ELECTRON_HEAD:
+                        recCells[i][j].setFill(Color.BLUE);
+                        break;
+                    case ELECTRON_TAIL:
+                        recCells[i][j].setFill(Color.RED);
+                        break;
+                    case CONDUCTOR:
+                        recCells[i][j].setFill(Color.YELLOW);
+                        break;
+                    }
+
+            }
+
+    }
+
+    private void initializeService(){
+
+        this.service = new Service<Void>() {
+            @Override
+            protected Task<Void> createTask() {
+                return new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        wireWorld.runWireWorld();
+                        List<Generation> list = wireWorld.getGenerations();
+                        current = list.get(list.size()-1);
+                        final CountDownLatch latch = new CountDownLatch(1);
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                try{
+                                    showGeneration();
+                                }finally{
+                                    latch.countDown();
+                                }
+                            }
+                        });
+                        latch.await(1500, TimeUnit.MILLISECONDS);
+                        return null;
+                    }
+                };
+            }
+        };
+
+    }
 
 }
