@@ -1,16 +1,17 @@
 package gui.resources;
 
+import core.WWStates;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class Cell extends Rectangle {
+public class RecCell extends Rectangle {
 
     private static Color[] states = {Color.BLACK, Color.BLUE, Color.RED, Color.YELLOW};
     private double stroke;
 
-    public Cell(double dim, int index){
+    public RecCell(double dim, int index){
 
         super(dim, dim);
         setStroke(Color.BLACK);
@@ -18,10 +19,6 @@ public class Cell extends Rectangle {
         setStrokeWidth(stroke);
         setState(index);
         setEffect(null);
-
-        setOnMouseClicked(e-> {
-            changeState();
-       });
 
         setOnMouseEntered(e-> {
             setStrokeWidth(stroke*1.5);
@@ -65,4 +62,20 @@ public class Cell extends Rectangle {
         return (Color) getFill();
     }
 
+    public WWStates getWWState() {
+
+        if (getFill() == Color.BLACK)
+            return WWStates.EMPTY;
+
+        if (getFill() == Color.BLUE)
+            return WWStates.ELECTRON_HEAD;
+
+        if (getFill() == Color.RED)
+            return WWStates.ELECTRON_TAIL;
+
+        if (getFill() == Color.YELLOW)
+            return WWStates.CONDUCTOR;
+
+        return null;
+    }
 }

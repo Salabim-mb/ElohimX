@@ -1,8 +1,10 @@
 package gui;
 
-import core.Generation;
+import core.WWStates;
 import core.WireWorld;
+import core.WireWorldCell;
 import gui.resources.CellBoard;
+import gui.resources.RecCell;
 import gui.resources.guiUtilities.ScrollFunctions;
 import gui.resources.guiUtilities.ViewCommunicator;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,6 +20,7 @@ import javafx.scene.text.Font;
 import java.io.IOException;
 
 
+
 public class WWCellViewController extends Pane{
 
     public static final double CELL_VIEW_HEIGHT = 420.0;
@@ -31,10 +34,11 @@ public class WWCellViewController extends Pane{
     private boolean endlessMode;
 
     private StringProperty currentGenProperty;
-    private Generation genZero;
+    private WireWorldCell[][] genZero;
     private int currentGen;
 
     CellBoard board;
+    RecCell[][] recCells;
     Group   boardWrapper;
 
     @FXML
@@ -74,7 +78,7 @@ public class WWCellViewController extends Pane{
         setBoardWidth(10);
         setEndlessMode(false);
         currentGen = 0;
-        //initializeGenZero();
+        initializeGenZero();
 
         currentGenProperty = new SimpleStringProperty("0");
         genIndex.textProperty().bind(currentGenProperty);
@@ -82,7 +86,10 @@ public class WWCellViewController extends Pane{
         genNumLabel.setFont(Font.font(13.5));
 
         board = new CellBoard(10, 10);
+        recCells = board.getCells();
         boardWrapper = new Group(board);
+
+        board.initializeRecCells(genZero, boardHeight, boardWidth);
         scrollConfig = new ScrollFunctions(board, boardWrapper, cellWindow);
 
         //setStyle("-fx-background-color: indigo");
@@ -95,12 +102,14 @@ public class WWCellViewController extends Pane{
     public void  resizeBoard(){
 
         boardWrapper.getChildren().remove(board);
-        board = new CellBoard(boardWidth, boardHeight);
+        board = new CellBoard(boardHeight, boardWidth);
         scrollConfig.setTarget(board);
         scrollConfig.setScaleValue(0.9);
         scrollConfig.updateScale();
         boardWrapper.getChildren().add(board);
-        //initializeGenZero();
+        initializeGenZero();
+        recCells = board.getCells();
+        board.initializeRecCells(genZero, boardHeight, boardWidth);
 
     }
 
@@ -153,20 +162,18 @@ public class WWCellViewController extends Pane{
         return currentGen;
     }
 
-/*
+
     private void initializeGenZero(){
 
-        WireWorldCell[][] cells = new WireWorldCell[boardHeight][boardWidth];
+        genZero = new WireWorldCell[boardHeight][boardWidth];
 
         for (int i=0; i<boardHeight; i++){
             for(int j=0; j<boardWidth; j++){
-                cells[i][j] = new WireWorldCell(WWStates.EMPTY);
+                genZero[i][j] = new WireWorldCell(WWStates.EMPTY);
             }
-
         }
-
-        genZero = new Generation(0, cells);
     }
- */
+
+
 
 }
