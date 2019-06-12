@@ -2,6 +2,7 @@ package gui.resources;
 
 
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import static gui.WWCellViewController.CELL_VIEW_HEIGHT;
 import static gui.WWCellViewController.CELL_VIEW_WIDTH;
@@ -12,7 +13,6 @@ public class CellBoard extends Pane {
 
 
     private Cell[][] cells;
-
 
     public CellBoard(int widthInCells, int heightInCells){
 

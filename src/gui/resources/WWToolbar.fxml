@@ -99,12 +99,12 @@
                 <Insets top="400.0" />
             </StackPane.margin>
         </Button>
-        <Button fx:id="saveButton" mnemonicParsing="false" prefWidth="120.0" text="Save to file..." StackPane.alignment="TOP_CENTER">
+        <Button fx:id="saveButton"  mnemonicParsing="false" prefWidth="120.0" text="Save to file..." StackPane.alignment="TOP_CENTER">
             <StackPane.margin>
                 <Insets top="450.0" />
             </StackPane.margin>
         </Button>
-        <Button fx:id="loadButton" mnemonicParsing="false" prefWidth="120.0" text="Load from file..." StackPane.alignment="TOP_CENTER">
+        <Button fx:id="loadButton" onAction="#loadFile" mnemonicParsing="false" prefWidth="120.0" text="Load from file..." StackPane.alignment="TOP_CENTER">
             <StackPane.margin>
                 <Insets top="500.0" />
             </StackPane.margin>

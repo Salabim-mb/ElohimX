@@ -20,6 +20,7 @@ public class ElohimXApp extends Application {
         ViewCommunicator communicator = new ViewCommunicator();
 
         Parent root = FXMLLoader.load(getClass().getResource("resources/MainMenu.fxml"));
+        root.setStyle("-fx-background-color: indigo");
         primaryStage.setTitle("ElohimX");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);

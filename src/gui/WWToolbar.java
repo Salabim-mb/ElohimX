@@ -9,9 +9,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 
 
@@ -19,6 +24,10 @@ import static utils.SpinnerUtilities.initializeSpinner;
 
 
 public class WWToolbar extends StackPane {
+
+    private Desktop desktop;
+    private FileChooser fileExplorer;
+
 
     @FXML
     ToggleButton endlessModeSwitch;
@@ -59,13 +68,15 @@ public class WWToolbar extends StackPane {
             ViewCommunicator.getWWController().setEndlessMode(newValue);
         });
 
+        desktop = Desktop.getDesktop();
+        fileExplorer = new FileChooser();
+        fileExplorer.setTitle("Choose a txt file...");
+        fileExplorer.setInitialDirectory(
+                new File(System.getProperty("user.home"))
+        );
+        fileExplorer.getExtensionFilters().add(new FileChooser.ExtensionFilter(".txt", "*.txt"));
 
         ViewCommunicator.setToolbarController(this);
-
-
-
-
-
     }
     @FXML
     public void goBack(ActionEvent e) throws IOException {
@@ -108,5 +119,30 @@ public class WWToolbar extends StackPane {
         window.show();
 
     }
+
+    private void openFile(File file) {
+        try {
+            desktop.open(file);
+        } catch (IOException e) {
+
+        }
+    }
+
+
+    @FXML
+    public void loadFile(ActionEvent e){
+
+        Stage window = (Stage)((Node) e.getSource()).getScene().getWindow();
+        File file = fileExplorer.showOpenDialog(window);
+        if (file != null) {
+            openFile(file);
+        }
+
+    }
+
+
+
+
+
 
 }
